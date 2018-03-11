@@ -1,0 +1,61 @@
+#### Global schema presented as RDF Schema
+@prefix qb:			<http://purl.org/linked-data/cube#> .
+@prefix qb4o:		<http://purl.org/olap#> .
+@prefix rdf:		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:		<http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bsbm:		<http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> .
+@prefix bsbm-inst:	<http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/>.
+@prefix gs:			<http://example.org/globalschema#> .  
+@prefix ex:			<http://example.org/federation#> .
+
+gs:node1 rdf:type qb:Observation .
+gs:node1 qb:DataSet gs:OfferDataset .
+gs:node1 ex:productPrice gs:node6 .
+gs:node1 ex:product gs:node2 .
+gs:node1 ex:vendor gs:node3 .
+gs:node1 ex:validFrom gs:node4 .
+gs:node1 ex:validTo gs:node5 .
+
+#### Product
+gs:node2 skos:broader gs:node21 .
+gs:node2 rdf:type ex:Product .
+gs:node2 gs:producer gs:node7 .
+gs:node2 gs:feature gs:node8 .
+gs:node2  ex:productFeature gs:node22 .
+#### Next level in hierarchy
+gs:node21 rdf:type ex:ProductType . ## product type
+gs:node21 skos:broader gs:node21 .
+#### Next level in hierarchy
+gs:node22 rdf:type ex:ProductFeature .
+
+#### Vendor
+gs:node3 rdf:type ex:Vendor .
+gs:node3 rdf:type bsbm:Vendor .
+gs:node3 skos:broader gs:node31 . ##city
+gs:node31 rdf:type ex:City .
+gs:node31 skos:broader gs:node32 . ##country
+gs:node32 rdf:type ex:Country .
+gs:node32 skos:broader gs:node33 . ##continent
+gs:node33 rdf:type ex:Continent .
+
+#### Review
+gs:node4 rdf:type ex:Review .
+gs:node4 ex:reviewFor gs:node2 .
+gs:node4 ex:date gs:node42 .
+gs:node4 ex:reviewer gs:node43 .
+gs:node4 ex:rating1 gs:node44 .
+gs:node4 ex:rating2 gs:node44 .
+gs:node4 ex:rating3 gs:node44 .
+gs:node4 ex:rating4 gs:node44 .
+#### NEXT LEVEL IN HIERARCHY
+gs:node43 rdf:type ex:Person .
+#### ex:Reviewer HIERARCHY
+gs:node43 skos:broader gs:node431 . ##city
+gs:node431 rdf:type ex:City .
+gs:node431 skos:broader gs:node432 . ##country
+gs:node432 rdf:type ex:Country .
+
+
+
