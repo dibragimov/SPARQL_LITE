@@ -13,6 +13,7 @@
 @prefix rev:        <http://purl.org/stuff/rev#> .
 @prefix dc:         <http://purl.org/dc/elements/1.1/> .
 @prefix foaf:       <http://xmlns.com/foaf/0.1/> .
+@prefix owl:        <https://www.w3.org/TR/2004/REC-owl-features-20040210/#> .
 
 ### Measure
 ex:gsmt1 fs:pattern [sp:subject gs:node1; sp:predicate rdf:type; sp:object qb:Observation ] .
@@ -43,6 +44,45 @@ ex:lsmt8 fs:pattern [sp:subject ls:node21; sp:predicate rdf:type; sp:object bsbm
 ex:llist3 sp:elements ex:lsmt7, ex:lsmt8 .
 ex:glist3 fs:schemaMatch ex:llist3 .
 gs:node21 fs:sameConcept ls:node21 .
+
+### Product PRODUCER 
+ex:gsmt28 fs:pattern [sp:subject gs:node2; sp:predicate  ex:producer; sp:object gs:node23] .
+ex:gsmt29 fs:pattern [sp:subject gs:node23; sp:predicate rdf:type; sp:object ex:Producer] .
+ex:glist17 sp:elements ex:gsmt28, ex:gsmt29 .
+ex:lsmt30 fs:pattern [sp:subject ls:node2; sp:predicate  bsbm:producer; sp:object ls:node23] .
+ex:lsmt31 fs:pattern [sp:subject ls:node23; sp:predicate rdf:type; sp:object bsbm:Producer] .
+ex:llist17 sp:elements ex:lsmt30, ex:lsmt31 .
+ex:glist17 fs:schemaMatch ex:llist17 .
+gs:node23 fs:sameConcept ls:node23 .
+
+##
+### step 2 in Producer hierarchy
+ex:gsmt30 fs:pattern [sp:subject gs:node23; sp:predicate skos:broader; sp:object gs:node231 ] . 
+ex:gsmt31 fs:pattern [sp:subject gs:node231; sp:predicate rdf:type; sp:object ex:City ] .
+ex:glist18 sp:elements ex:gsmt30, ex:gsmt31 . 
+ex:lsmt32 fs:pattern [sp:subject ls:node23; sp:predicate bsbm:livesIn; sp:object ls:node231 ] . 
+ex:lsmt33 fs:pattern [sp:subject ls:node231; sp:predicate rdf:type; sp:object bsbm:City ] .
+ex:llist18 sp:elements ex:lsmt33, ex:lsmt32 .
+ex:glist18 fs:schemaMatch ex:llist18 .
+gs:node231 fs:sameConcept ls:node231 . 
+
+### step 3 in Producer hierarchy
+ex:gsmt32 fs:pattern [sp:subject gs:node231; sp:predicate skos:broader; sp:object gs:node232 ] .
+ex:gsmt33 fs:pattern [sp:subject gs:node232; sp:predicate rdf:type; sp:object ex:Country ] .
+ex:glist19 sp:elements ex:gsmt32, ex:gsmt33 . 
+ex:lsmt34 fs:pattern [sp:subject ls:node231; sp:predicate gn:parentFeature; sp:object ls:node232 ] . 
+ex:lsmt35 fs:pattern [sp:subject ls:node232; sp:predicate rdf:type; sp:object bsbm:Country ] .
+ex:llist19 sp:elements ex:lsmt34, ex:lsmt35 .
+ex:glist19 fs:schemaMatch ex:llist19 .
+gs:node232 fs:sameConcept ls:node232 . 
+
+ex:gsmt34 fs:pattern [sp:subject gs:node233; sp:predicate ex:sameAs; sp:object gs:node234 ] .
+ex:glist20 sp:elements ex:gsmt34 . 
+ex:lsmt36 fs:pattern [sp:subject ls:node233; sp:predicate owl:sameAs; sp:object ls:node234 ] .
+ex:llist20 sp:elements ex:lsmt36 .
+ex:glist20 fs:schemaMatch ex:llist20 .
+gs:node234 fs:sameConcept ls:node234 . 
+##
 
 ###Measure (#Query -4)
 ex:gsmt16 fs:pattern [sp:subject gs:node2; sp:predicate ex:productFeature; sp:object gs:node22 ] .
@@ -83,7 +123,7 @@ ex:llist6 sp:elements ex:lsmt13, ex:lsmt14 .
 ex:glist6 fs:schemaMatch ex:llist6 .
 gs:node32 fs:sameConcept ls:node32 . 
 
-###Review  Query -5 ##GS S H O U L D    B E   R E P L A C E D   B Y    E X
+###Review  Query -5 
 ex:gsmt13 fs:pattern [sp:subject gs:node4; sp:predicate rdf:type; sp:object ex:Review ].
 ex:gsmt15 fs:pattern [sp:subject gs:node4; sp:predicate ex:reviewFor; sp:object gs:node2 ].
 ex:glist7 sp:elements ex:gsmt13, ex:gsmt15 . 
@@ -130,25 +170,25 @@ gs:node432 fs:sameConcept ls:node432 .
 ### RATING HIERARCHY
 ex:gsmt24 fs:pattern [sp:subject gs:node4; sp:predicate ex:rating1; sp:object gs:node44 ] .
 ex:glist13 sp:elements ex:gsmt24 . 
-ex:lsmt26 fs:pattern [sp:subject gs:node4; bsbm:predicate bsbm:rating1; sp:object gs:node44 ] .
+ex:lsmt26 fs:pattern [sp:subject ls:node4; sp:predicate bsbm:rating1; sp:object ls:node44 ] .
 ex:llist13 sp:elements ex:lsmt26 .
 ex:glist13 fs:schemaMatch ex:llist13 .
 
 ex:gsmt25 fs:pattern [sp:subject gs:node4; sp:predicate ex:rating2; sp:object gs:node44 ] .
 ex:glist14 sp:elements ex:gsmt25 . 
-ex:lsmt27 fs:pattern [sp:subject gs:node4; bsbm:predicate bsbm:rating2; sp:object gs:node44 ] .
+ex:lsmt27 fs:pattern [sp:subject ls:node4; sp:predicate bsbm:rating2; sp:object ls:node44 ] .
 ex:llist14 sp:elements ex:lsmt27 .
 ex:glist14 fs:schemaMatch ex:llist14 .
 
 ex:gsmt26 fs:pattern [sp:subject gs:node4; sp:predicate ex:rating3; sp:object gs:node44 ] .
 ex:glist15 sp:elements ex:gsmt26 . 
-ex:lsmt28 fs:pattern [sp:subject gs:node4; bsbm:predicate bsbm:rating3; sp:object gs:node44 ] .
+ex:lsmt28 fs:pattern [sp:subject ls:node4; sp:predicate bsbm:rating3; sp:object ls:node44 ] .
 ex:llist15 sp:elements ex:lsmt28 .
 ex:glist15 fs:schemaMatch ex:llist15 .
 
 ex:gsmt27 fs:pattern [sp:subject gs:node4; sp:predicate ex:rating4; sp:object gs:node44 ] .
 ex:glist16 sp:elements ex:gsmt27 . 
-ex:lsmt29 fs:pattern [sp:subject gs:node4; bsbm:predicate bsbm:rating4; sp:object gs:node44 ] .
+ex:lsmt29 fs:pattern [sp:subject ls:node4; sp:predicate bsbm:rating4; sp:object ls:node44 ] .
 ex:llist16 sp:elements ex:lsmt29 .
 ex:glist16 fs:schemaMatch ex:llist16 .
 gs:node44 fs:sameConcept ls:node44 .

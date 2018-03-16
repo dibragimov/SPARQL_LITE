@@ -37,7 +37,7 @@ public class ResearchProject {
     
     public static void main(String[] args) {
        RLogger.initialize();
-       String globalQuery = GQueries.getQuery(5);
+       String globalQuery = GQueries.getQuery(1);
        RLogger.info("|| GLOBAL QUERY || --> " + globalQuery);
        System.out.println("globalQuery --> " + globalQuery);
        String localizedQuery = LocalQueryBuilder.build(globalQuery);

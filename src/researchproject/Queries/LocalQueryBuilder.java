@@ -36,7 +36,8 @@ public class LocalQueryBuilder {
        Map<String,String> variables = new HashMap<>();
        for(int j=0; subqueries.size() > j; j++)
        {
-           
+           try 
+           {
            //obtaining variables from Triples to store and later replace them (global with local)
             
             String variablesQuery = variablesQueries.get(j);            
@@ -64,6 +65,10 @@ public class LocalQueryBuilder {
             String localTriples = TripleCombinator.buildlocalizedRequest(result);
             //replacing existing global schema with local one 
             globalQuery = globalQuery.replace(globalTriples," "+localTriples+" ");
+           }
+           catch(Exception ex) {
+                RLogger.info("||EXCEPTION WHILE BUILDING LOCAL QUERY || --> " + ex.getMessage());
+           }
        }
        //replace variables in SELECT params 
        for (Map.Entry<String, String> entry : variables.entrySet())

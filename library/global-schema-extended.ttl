@@ -27,9 +27,13 @@ gs:node2  ex:productFeature gs:node22 .
 #### Next level in hierarchy
 gs:node21 rdf:type ex:ProductType . ## product type
 gs:node21 skos:broader gs:node21 .
+gs:node2  rdf:type gs:node21 . 
 #### Next level in hierarchy
 gs:node22 rdf:type ex:ProductFeature .
-
+#### NEXT LEVEL IN HIERARCHY
+gs:node2 ex:producer gs:node23 .
+gs:node23 rdf:type ex:Producer.
+ 
 #### Vendor
 gs:node3 rdf:type ex:Vendor .
 gs:node3 rdf:type bsbm:Vendor .

@@ -22,7 +22,7 @@ public class RLogger {
         FileHandler fh;  
         try {
             // This block configure the logger with handler and formatter 
-            String path = System.getProperty("user.dir")+System.getProperty("file.separator")+"MyLogFile.log";
+            String path = System.getProperty("user.dir")+System.getProperty("file.separator")+"LogFile.log";
             fh = new FileHandler(path); 
             logger.setUseParentHandlers(false); 
             logger.addHandler(fh);

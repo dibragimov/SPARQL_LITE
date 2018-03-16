@@ -115,7 +115,7 @@ public class GlobalSchemaParser {
         String subQuery = "";
   
         //get All Prefixes
-        Pattern patternPrefic = Pattern.compile(prefixRegexString);
+        Pattern patternPrefic = Pattern.compile(prefixRegexString,Pattern.CASE_INSENSITIVE);
         Matcher matchPrefix = patternPrefic.matcher(query);
         while (matchPrefix.find()) {
             subQuery = matchPrefix.group(0).substring(0, matchPrefix.group(0).length() - 6);
