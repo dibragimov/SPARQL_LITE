@@ -7,7 +7,7 @@ package researchproject.models;
 
 /**
  *
- * @author Iskandar
+ * MODEL FOR KEY VALUE PAIR FOR COLUMN NAME AND ITS VALUE
  */
 public class KeyValuePair {
     

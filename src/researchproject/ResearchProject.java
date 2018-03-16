@@ -19,14 +19,14 @@ import researchproject.Parser.OuterClassParser;
 import researchproject.Parser.QueryParser;
 import researchproject.Queries.GQueries;
 import researchproject.Queries.LocalQueryBuilder;
-import researchproject.SqlService.SqlRepository;
+import researchproject.SqlService.SqlRepClient;
 import researchproject.SqlService.SqlService;
 import researchproject.Virtuoso.VirtuosoClient;
 import researchproject.mapping.JsonObjectParser;
 
 /**
  *
- * @author HP
+ * MAIN CLASS
  */
 public class ResearchProject {
 
@@ -36,27 +36,27 @@ public class ResearchProject {
     
     public static void main(String[] args) {
        
-       String globalQuery = GQueries.getQuery(1);
+       String globalQuery = GQueries.getQuery(4);
        System.out.println("globalQuery --> " + globalQuery);
        String localizedQuery = LocalQueryBuilder.build(globalQuery);
        System.out.println("localizedQuery --> " + localizedQuery);
-       String entailedQuery = Helper.RemoveDoubleSpaces(EntailmentParser.GetBasicQuery(localizedQuery));
+       String entailedQuery = localizedQuery;//Helper.RemoveDoubleSpaces(EntailmentParser.GetBasicQuery(localizedQuery));
        
-       SqlRepository.Initialize();
+       SqlRepClient.Initialize();
        exectureSubQuery(entailedQuery, 6);
       /*
-      //int i =7;
+      //int i =3;
       for(int i =0; i <queryNo.length; i++)
       {
-          int queryNumber = 7;//queryNo[i];           
-           String queryString = Helper.RemoveDoubleSpaces(BsbmQuery.getQuery(i));
-           String entailedQuery = EntailmentParser.GetBasicQuery(queryString);
-           
            System.out.println("=======    Query #" + (i+1) + "   ========");
+           int queryNumber = 7;//queryNo[i];           
+           String queryString = Helper.RemoveDoubleSpaces(BsbmQuery.getQuery(i));
+           String entailedQuery = queryString;// EntailmentParser.GetBasicQuery(queryString); // 
+           
            exectureSubQuery(entailedQuery, (i+1));
            System.out.println("=======    FINISHED   ========");
       }
-      */
+      //*/
      }
     
     public static void exectureSubQuery(String queryString, int index)
@@ -76,7 +76,7 @@ public class ResearchProject {
                 JSONObject jObject = VirtuosoClient.sendRequest(query, "http://localhost:8890/Data-set");
                 List<String> columns = SqlService.createTable(jObject, table);
                 String sql = JsonObjectParser.populateTable(table, jObject);
-                SqlRepository.runStatement(sql);
+                SqlRepClient.runStatement(sql);
                 tableDetails.put(table, columns);
             }
             catch (Exception e)
@@ -86,8 +86,9 @@ public class ResearchProject {
             tableIndex += 1;
         }
         String outerSqlstat = OuterClassParser.buildOuterQuery(queryString, tableDetails, index); 
+        outerSqlstat = outerSqlstat.replaceAll(" [a-zA-z0-9] ", " ");
         System.out.println(outerSqlstat);
-        SqlRepository.selectAll(outerSqlstat);
+        SqlRepClient.selectAll(outerSqlstat);
     }
     
 }

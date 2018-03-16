@@ -14,7 +14,8 @@ import researchproject.Parser.Helper;
 import researchproject.models.Triple;
 /**
  *
- * @author Iskandar
+ * THIS CLASS IS RESPONSIBLE FOR CREATING SPARQL STATEMENTS (CONSTRUCT, SELECT ) WHICH
+ * LATER IS SENT TO JENA|VIRTUOSO
  */
 public class TripleCombinator {
  

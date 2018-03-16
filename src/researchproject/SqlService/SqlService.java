@@ -15,6 +15,8 @@ import org.json.JSONObject;
 import researchproject.Parser.Helper;
 import researchproject.mapping.JsonObjectParser;
  
+//THIS CLASS IS RESPONSIBLE FOR CREATING TABLE 
+
 public class SqlService {
         public static List<String> createTable(JSONObject jObject, String table)
     {         
@@ -42,7 +44,7 @@ public class SqlService {
         createSql += paramStatement + ");";
         System.out.println("CREATE TABLE " + table);
         System.out.println(createSql);
-        SqlRepository.runStatement(createSql);
+        SqlRepClient.runStatement(createSql);
         return returnResult;
     }
 }

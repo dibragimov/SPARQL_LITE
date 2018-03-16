@@ -28,7 +28,7 @@ import researchproject.Parser.QueryParser;
 
 /**
  *
- * @author HP
+ * THIS CLASS IS RESPONSIBLE FOR EXECUTING SPARQL REQUESTS IN JENA
  */
 public class SparqlService {
     private static Model _gInstance = null;
@@ -37,7 +37,8 @@ public class SparqlService {
         if(_gInstance == null)
         {
         FileManager.get().addLocatorClassLoader(SparqlService.class.getClassLoader());
-        _gInstance = FileManager.get().loadModel("D:/WIUT/Research/global-schema-fixed.ttl");
+        //_gInstance = FileManager.get().loadModel("D:/WIUT/Research/global-schema-fixed.ttl");
+        _gInstance = FileManager.get().loadModel("D:/WIUT/Research/global-schema-extended.ttl");
         }
         return _gInstance;
     }
@@ -48,7 +49,8 @@ public class SparqlService {
         if(_mInstance == null)
         {
         FileManager.get().addLocatorClassLoader(SparqlService.class.getClassLoader());
-        _mInstance = FileManager.get().loadModel("D:/WIUT/Research/Mapping-fixed.ttl");
+       // _mInstance = FileManager.get().loadModel("D:/WIUT/Research/Mapping-fixed.ttl");
+       _mInstance = FileManager.get().loadModel("D:/WIUT/Research/mapping-extended.ttl");
         }
         return _mInstance;
     }   

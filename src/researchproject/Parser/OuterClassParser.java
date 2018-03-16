@@ -11,11 +11,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import researchproject.SqlService.SqlRepository;
+import researchproject.SqlService.SqlRepClient;
 
 /**
  *
- * @author HP
+  THIS CLASS RESPONSIBLE FOR CREATING OUTER (FINAL) SQL STATEMENT  
+  * 
  */
 public class OuterClassParser {
     public static String buildOuterQuery(String query, Map<String, List<String>> columns, int queryIndex)
@@ -59,10 +60,16 @@ public class OuterClassParser {
                             {
                                 tableJoin += " INNER JOIN " + tableName + " ON " + existingColumns + " = " + tableName + "." + column; 
                                 addedTables += table;
+                                addedTables += tableName;
                             }
                             else if(!addedTables.contains(existingColumnTableName))
                             {
                                 tableJoin += " INNER JOIN " + existingColumnTableName + " ON " + existingColumns + " = " + tableName + "." + column; 
+                                addedTables += existingColumnTableName;
+                            }
+                            else if(!addedTables.contains(tableName))
+                            {
+                                tableJoin += " INNER JOIN " + tableName + " ON " + existingColumns + " = " + tableName + "." + column; 
                                 addedTables += existingColumnTableName;
                             }
                             
@@ -104,7 +111,7 @@ public class OuterClassParser {
                     }  
                 }
                 viewTable += tables;
-                SqlRepository.exectureStatement(viewTable);
+                SqlRepClient.exectureStatement(viewTable);
                 String outerPart = outerQuery.replaceAll("[(]{2}", "(").replaceAll("[(]avg", "avg");
                 suffix = suffix.replaceAll("desc", "desc,");
                 

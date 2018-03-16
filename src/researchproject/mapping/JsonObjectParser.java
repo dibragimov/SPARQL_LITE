@@ -17,7 +17,7 @@ import researchproject.models.Triple;
 
 /**
  *
- * @author Iskandar
+ * THIS CLASS IS RESPONSIBLE FOR PARSING JSON RESULT RETURNED FROM VIRTUOSO
  */
 public class JsonObjectParser {
         

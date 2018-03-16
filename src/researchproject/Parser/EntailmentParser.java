@@ -28,10 +28,12 @@ public class EntailmentParser {
             String union =  GetUri(outerquery);
             int length = outerquery.length();
             startIndex = query.indexOf(outerquery,startIndex + length);
-            query = query.substring(0,(startIndex))+ " { " +query.substring(startIndex,(startIndex+length)) + union +  query.substring((startIndex+length));
+            query = query.substring(0,(startIndex))+ "{" +query.substring(startIndex,(startIndex+length)) + union +  query.substring((startIndex+length));
             
         }
-        System.out.println("Generated UNION: "+ query);
+        System.out.println("=================== Generated UNION: ===================");
+        System.out.println(query);
+        System.out.println("=================== Generated UNION: ===================");
         return query;  
     }   
         public static String GetUri(String query)
@@ -41,7 +43,7 @@ public class EntailmentParser {
         String finding = null;
         if(match.find()) {
             finding = match.group(0);
-            String result = "} UNION { " +finding+" <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?temp . ?product a ?temp .} ";
+            String result = "} UNION { " +finding+" <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?temp . ?product a ?temp .}";
             return result;
       
         }

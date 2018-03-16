@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import researchproject.models.Triple;
 /**
  *
- * @author Iskandar
+ * THIS CLASS IS RESPONSIBLE FOR SENDING REST REQUESTS TO VIRTUOSO
  */
 public class VirtuosoClient {
 

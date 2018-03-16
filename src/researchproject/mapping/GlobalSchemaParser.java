@@ -15,7 +15,7 @@ import researchproject.models.Triple;
 
 /**
  *
- * @author Iskandar
+ * THIS CLASS IS RESPONSIBLE FOR PARSING GLOBAL SCHEMA
  */
 public class GlobalSchemaParser {
     
@@ -38,8 +38,12 @@ public class GlobalSchemaParser {
     }  
      
     public static List<String> getSchema(String query)
-    {  
-        Pattern patternStatement = Pattern.compile("[^#]\\?([^{}(#)<>]*)\\.",Pattern.CASE_INSENSITIVE);
+    {  Pattern patternStatement;
+        if(!query.contains("UNION"))
+            patternStatement = Pattern.compile("[^#]\\?([^{}(#)<>]*)\\.",Pattern.CASE_INSENSITIVE);
+        else 
+             patternStatement = Pattern.compile("[^#]\\?([^(#)<>]*)\\.",Pattern.CASE_INSENSITIVE);
+        
         Matcher matchStatement = patternStatement.matcher(query);
         
         List<String> result = new ArrayList<>();

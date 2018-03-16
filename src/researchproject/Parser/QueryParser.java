@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author HP
+ * THIS CLASS IS RESPONSIBLE FOR BUILDING INNER QUERIES FOR SUB SELECTs of SPARQL
  */
 public class QueryParser {
     
@@ -65,6 +65,7 @@ public class QueryParser {
                     String selectStatement = queryPart.substring(1, closeTagIndex).replaceAll(" #", "");
                     selectStatement = selectStatement.substring(selectStatement.indexOf("Select"));
                     String fullStatement = prefix + " " + selectStatement;
+                    //fullStatement = EntailmentParser.GetBasicQuery(fullStatement);
                     resultSet.add(fullStatement);
                 }
             }

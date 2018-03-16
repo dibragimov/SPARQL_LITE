@@ -7,7 +7,7 @@ package researchproject.models;
 
 /**
  *
- * @author Iskandar
+ * MODEL FOR TRIPLE
  */
 public class Triple {
     public String subject;
