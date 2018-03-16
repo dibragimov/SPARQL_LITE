@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.json.JSONObject;
+import researchproject.Logging.RLogger;
 import researchproject.Parser.BsbmQuery;
 import researchproject.Parser.EntailmentParser;
 import researchproject.Parser.Helper;
@@ -35,10 +36,12 @@ public class ResearchProject {
     private static int[] queryNo = new int[]{0,1,2,3,4,5,6,7};
     
     public static void main(String[] args) {
-       
-       String globalQuery = GQueries.getQuery(4);
+       RLogger.initialize();
+       String globalQuery = GQueries.getQuery(5);
+       RLogger.info("|| GLOBAL QUERY || --> " + globalQuery);
        System.out.println("globalQuery --> " + globalQuery);
        String localizedQuery = LocalQueryBuilder.build(globalQuery);
+       RLogger.info("|| LOCALIZED QUERY || --> " + localizedQuery);
        System.out.println("localizedQuery --> " + localizedQuery);
        String entailedQuery = localizedQuery;//Helper.RemoveDoubleSpaces(EntailmentParser.GetBasicQuery(localizedQuery));
        

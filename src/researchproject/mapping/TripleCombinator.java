@@ -6,10 +6,14 @@
 package researchproject.mapping;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import researchproject.Parser.Helper;
 import researchproject.models.Triple;
 /**
@@ -81,12 +85,26 @@ public class TripleCombinator {
     public static String buildlocalizedRequest(List<Triple> triples)
     {
         String result = "";
+        triples = triples.stream().sorted((object1, object2) -> object1.getPredicate().compareTo(object2.getPredicate())).collect(Collectors.toList());
+        
+        String prevS = "";
+        String prevO = "";
         for (Triple triple : triples) {
-            result += replaceNodeVars(triple.getSubject()) + " " + removeAngelesFromRdfType(triple.getPredicate()) + " " + replaceNodeVars(triple.getObject()) + " . ";
+            String currS = triple.getSubject();
+            String currO = triple.getObject();
+            String current = "{"+replaceNodeVars(triple.getSubject()) + " " + removeAngelesFromRdfType(triple.getPredicate()) + " " + replaceNodeVars(triple.getObject()) + " .} ";
+            if(prevS.contains(currS) && prevO.contains(currO))
+            {
+              current = "UNION "+ current;
+            }
+            result += current;
+            prevS = currS; 
+            prevO = currO;
         }
         System.out.println(result);
         return result;
     }
+    
     public static String removeAngelesFromRdfType(String text)
     {
         if(text.contains("<rdf:type>"))
@@ -104,6 +122,12 @@ public class TripleCombinator {
         return text;
     }
     
- 
+    public class ObjectComparator implements Comparator<Triple> {
+
+       public int compare(Triple obj1, Triple obj2) {
+           return obj1.getSubject().compareTo(obj2.getSubject());
+       }
+
+   }
  
 }

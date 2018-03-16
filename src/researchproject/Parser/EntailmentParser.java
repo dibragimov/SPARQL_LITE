@@ -43,7 +43,8 @@ public class EntailmentParser {
         String finding = null;
         if(match.find()) {
             finding = match.group(0);
-            String result = "} UNION { " +finding+" <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?temp . ?product a ?temp .}";
+            String result = "} UNION { " +finding+" <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?temp . ?product a ?temp .}"+
+                             " UNION { " +finding+" <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> ?temp . ?product a ?temp .}";
             return result;
       
         }

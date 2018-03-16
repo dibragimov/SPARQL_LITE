@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import researchproject.Logging.RLogger;
 import researchproject.Parser.Helper;
 import researchproject.models.Triple;
 
@@ -38,7 +39,8 @@ public class GlobalSchemaParser {
     }  
      
     public static List<String> getSchema(String query)
-    {  Pattern patternStatement;
+    {  
+        Pattern patternStatement;
         if(!query.contains("UNION"))
             patternStatement = Pattern.compile("[^#]\\?([^{}(#)<>]*)\\.",Pattern.CASE_INSENSITIVE);
         else 
@@ -50,22 +52,55 @@ public class GlobalSchemaParser {
         while(matchStatement.find())
         {
             String selectPart = matchStatement.group(0);
+            //removing unions
+            selectPart = selectPart.replaceAll("\\{", "").replaceAll("\\}", "").replaceAll(" UNION ", " ");
             String triples =  selectPart + " ";
             String prefix = GetPrefixes(query);
+            
             result.add( prefix + " CONSTRUCT{ "+ triples+ " } WHERE { "+ triples+ " }");
         }
 
        return result;        
     }
-    public static List<String> getVariablesQuery(String query)
+        public static List<String> getSchemaTriples(String query)
     {  
-        Pattern patternStatement = Pattern.compile("[^#]\\?([^{}(#)<>]*)\\.",Pattern.CASE_INSENSITIVE);
+        Pattern patternStatement;
+        if(!query.contains("UNION"))
+            patternStatement = Pattern.compile("[^#]\\?([^{}(#)<>]*)\\.",Pattern.CASE_INSENSITIVE);
+        else 
+             patternStatement = Pattern.compile("[^#]\\?([^(#)<>]*)\\.",Pattern.CASE_INSENSITIVE);
+        
         Matcher matchStatement = patternStatement.matcher(query);
         
         List<String> result = new ArrayList<>();
         while(matchStatement.find())
         {
             String selectPart = matchStatement.group(0);
+            if(query.contains("UNION"))
+            {
+                selectPart = selectPart + " }";
+            }
+            result.add(selectPart);
+        }
+
+       return result;        
+    }
+    public static List<String> getVariablesQuery(String query)
+    {  
+        Pattern patternStatement;
+        if(!query.contains("UNION"))
+            patternStatement = Pattern.compile("[^#]\\?([^{}(#)<>]*)\\.",Pattern.CASE_INSENSITIVE);
+        else 
+             patternStatement = Pattern.compile("[^#]\\?([^(#)<>]*)\\.",Pattern.CASE_INSENSITIVE);
+        
+        Matcher matchStatement = patternStatement.matcher(query);
+        
+        List<String> result = new ArrayList<>();
+        while(matchStatement.find())
+        {
+            String selectPart = matchStatement.group(0);
+            //removing unions
+            selectPart = selectPart.replaceAll("\\{", "").replaceAll("\\}", "").replaceAll(" UNION ", " ");
             String triples =  selectPart + " ";
             String prefix = GetPrefixes(query);
             result.add( prefix + " SELECT *  WHERE { "+ triples+ " }");
@@ -185,6 +220,7 @@ public class GlobalSchemaParser {
                String o = matchPrefix.group(0).substring(1, matchPrefix.group(0).length() - 1);
                o = o.replace(">", "");
                o = o.replace("<", "").trim();
+               RLogger.info("||   LSMT TRIPLE: || --> " +  "s: "+s + " p: " +p+ " o:" + o);
                returnResult.add(new Triple(s,p,o));
             } 
         }

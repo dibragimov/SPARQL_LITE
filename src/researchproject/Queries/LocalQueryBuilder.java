@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.jena.ext.com.google.common.collect.HashBiMap;
 import org.json.JSONObject;
+import researchproject.Logging.RLogger;
 import researchproject.Sparql.SparqlService;
 import researchproject.Virtuoso.VirtuosoClient;
 import researchproject.mapping.GlobalSchemaParser;
@@ -25,24 +26,30 @@ import researchproject.models.Triple;
  * THIS CLASS RESPONSIBLE FOR LOCALIZING GLOBAL QUERIES
  */
 public class LocalQueryBuilder {
-    public final static String _mappingUri = "http://localhost:8890/Mapping-ex24567";// "http://localhost:8890/DAV-mapping";
-    public final static String _globalSchemaUri = "http://localhost:8890/Schema-ex24567";//http://localhost:8890/DAV-fixed";
-    public final static String _datasetUri = "http://localhost:8890/Data-fixed22" ;//"http://localhost:8890/Data";
+    public final static String _datasetUri = "http://localhost:8890/Data-fixed22" ;
     
     public static String build(String globalQuery)
     {
        List<String> subqueries = GlobalSchemaParser.getSchema(globalQuery);
+       List<String> subQueryBlocks = GlobalSchemaParser.getSchemaTriples(globalQuery);
        List<String> variablesQueries = GlobalSchemaParser.getVariablesQuery(globalQuery);
        Map<String,String> variables = new HashMap<>();
        for(int j=0; subqueries.size() > j; j++)
        {
+           
            //obtaining variables from Triples to store and later replace them (global with local)
-            String variablesQuery = variablesQueries.get(j);
-            JSONObject subQueryVariables = VirtuosoClient.sendRequest(variablesQuery, _globalSchemaUri);
-            variables.putAll(JsonObjectParser.getVariables(subQueryVariables));
             
+            String variablesQuery = variablesQueries.get(j);            
+            RLogger.info("|| SELECT SUBQUERY FOR VARIABLES || --> " +  variablesQuery);
+            
+            //JSONObject subQueryVariables = VirtuosoClient.sendRequest(variablesQuery, _globalSchemaUri);
+            //variables.putAll(JsonObjectParser.getVariables(subQueryVariables));
+            List<String> subQueryVariables2 = SparqlService.getVariables(variablesQuery);
+            Map<String,String> pairs = GlobalSchemaParser.GetVariables(subQueryVariables2);
+            variables.putAll(pairs);
             //obtaining triples from localSchema
             String subQuery =subqueries.get(j);
+            RLogger.info("|| CONSTRUCT SUBQUERY FOR TRIPLES || --> " +  subQuery);
             List<Triple> contstructedTriples =  SparqlService.getCnsctFromGlobalMapping(subQuery);
             
             // checking all combinations of triples like (1st,3th,5th triples)(1st,2nd,4th,5th triples)
@@ -53,7 +60,7 @@ public class LocalQueryBuilder {
 
             List<Triple> result = getTriplesFromLsmt(localSchemas);
             
-            String globalTriples =  GlobalSchemaParser.getGlobalTriples(subQuery);            
+            String globalTriples = subQueryBlocks.get(j);            
             String localTriples = TripleCombinator.buildlocalizedRequest(result);
             //replacing existing global schema with local one 
             globalQuery = globalQuery.replace(globalTriples," "+localTriples+" ");
@@ -61,6 +68,7 @@ public class LocalQueryBuilder {
        //replace variables in SELECT params 
        for (Map.Entry<String, String> entry : variables.entrySet())
        {
+           RLogger.info("|| VARIABLE'S PAIR || --> " + entry.getKey()+  " == "+ entry.getValue());
            globalQuery = globalQuery.replaceAll("\\?"+entry.getKey()+"(?![A-Za-z]+)",entry.getValue());
        }
        
@@ -73,6 +81,7 @@ public class LocalQueryBuilder {
             List<Triple> result = new ArrayList<>();
             for(String schema : localSchemas) {
                  String lSchema = TripleCombinator.BuildLSchemaRequest(schema);
+                 RLogger.info("||  QUERY FOR LSMT TRIPLE PATTERN || --> " +  lSchema);
                  List<String> pairs = SparqlService.getFromGlobalMapping(lSchema);
                  List<Triple> triples = GlobalSchemaParser.getTriples(pairs);   
                  result.addAll(triples);
@@ -82,15 +91,23 @@ public class LocalQueryBuilder {
     // Getting lsmt by sending localized queries
     private static List<String> getLocalSchemaMatches(String[][] combinations,List<Triple> contstructedTriples)
     {
+            
             List<String> lSchema =  new ArrayList<>();
             for(int i = combinations.length-1; i >= 0; i--)
             {
                 List<Triple> triples = TripleCombinator.getTriples(combinations[i],contstructedTriples);
                 String query = TripleCombinator.localizedQuery(triples);
                 List<String> pairs = SparqlService.getFromGlobalMapping(query);
-                List<String> lsmts = GlobalSchemaParser.getLsmt(pairs);    
+                List<String> lsmts = GlobalSchemaParser.getLsmt(pairs); 
+                if(lsmts.size() >0)
+                {                    
+                    RLogger.info("|| LSMT QUERY || --> " +  query);
+                    for(String lsmt : lsmts)
+                        RLogger.info("|| RETURNED LSMT || --> " +  lsmt);
+                }
+                System.out.println("=======" + lsmts +"=======");   
                 lSchema.addAll(lsmts);
-                //System.out.println("=======" + i +"=======");
+                System.out.println("=======" + i +"=======");
             }
             return lSchema;
     }

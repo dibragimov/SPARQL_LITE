@@ -109,7 +109,8 @@ public class SparqlService {
             while(cit.hasNext()) {
                  Statement stmt = cit.nextStatement();
                  Triple triple = stmt.asTriple();
-                System.out.println("Statement: " +triple.getSubject()); System.out.println("Statement: " +triple.getPredicate()); System.out.println("Statement: " +triple.getObject());
+                System.out.print(" s: " +triple.getSubject()); System.out.print(" p: " +triple.getPredicate()); System.out.print(" o: " +triple.getObject());
+                System.out.println();
                 result.add(new researchproject.models.Triple(triple.getSubject().toString(),triple.getPredicate().toString(),triple.getObject().toString()));
             }
         }
@@ -128,11 +129,7 @@ public class SparqlService {
         try {
             ResultSet results =qExecutor.execSelect();
             while(results.hasNext()) {
-                //QuerySolution soln = results.nextSolution();
-                //Literal name = soln.getLiteral("productType");
-                //System.out.println(name);
                 result.add(results.next().toString());
-               // System.out.println( results.next() );
             }
         }
         finally  {
