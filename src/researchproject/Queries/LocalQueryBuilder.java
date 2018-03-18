@@ -11,13 +11,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.apache.jena.ext.com.google.common.collect.HashBiMap;
-import org.json.JSONObject;
 import researchproject.Logging.RLogger;
 import researchproject.Sparql.SparqlService;
-import researchproject.Virtuoso.VirtuosoClient;
 import researchproject.mapping.GlobalSchemaParser;
-import researchproject.mapping.JsonObjectParser;
 import researchproject.mapping.TripleCombinator;
 import researchproject.models.Triple;
 
@@ -110,9 +106,9 @@ public class LocalQueryBuilder {
                     for(String lsmt : lsmts)
                         RLogger.info("|| RETURNED LSMT || --> " +  lsmt);
                 }
-                System.out.println("=======" + lsmts +"=======");   
+                //System.out.println("=======" + lsmts +"=======");   
                 lSchema.addAll(lsmts);
-                System.out.println("=======" + i +"=======");
+                //System.out.println("=======" + i +"=======");
             }
             return lSchema;
     }

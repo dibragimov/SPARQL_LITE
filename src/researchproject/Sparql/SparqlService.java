@@ -97,8 +97,8 @@ public class SparqlService {
         }
         return result;
     }
-       public static  List<researchproject.models.Triple> getCnsctFromGlobalMapping(String queryString)
-     {      
+    public static  List<researchproject.models.Triple> getCnsctFromGlobalMapping(String queryString)
+    {      
         
         Query query = QueryFactory.create(queryString);
         QueryExecution qExecutor = QueryExecutionFactory.create(query,SparqlService.getGSchemaInstance());
@@ -109,8 +109,8 @@ public class SparqlService {
             while(cit.hasNext()) {
                  Statement stmt = cit.nextStatement();
                  Triple triple = stmt.asTriple();
-                System.out.print(" s: " +triple.getSubject()); System.out.print(" p: " +triple.getPredicate()); System.out.print(" o: " +triple.getObject());
-                System.out.println();
+               // System.out.print(" s: " +triple.getSubject()); System.out.print(" p: " +triple.getPredicate()); System.out.print(" o: " +triple.getObject());
+               // System.out.println();
                 result.add(new researchproject.models.Triple(triple.getSubject().toString(),triple.getPredicate().toString(),triple.getObject().toString()));
             }
         }

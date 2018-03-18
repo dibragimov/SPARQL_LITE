@@ -186,5 +186,37 @@ public class JsonObjectParser {
         return bulkInsert;
         
     }
-
+    
+    public static void showResult( JSONObject jObject)
+    {
+        Map<String,String> columns =  getColumns(jObject);
+        try
+        {
+            
+            int j = 0;
+            JSONArray arr = jObject.getJSONObject("results").getJSONArray("bindings");
+                          
+            for(Map.Entry<String, String> entry : columns.entrySet())
+            {
+                System.out.print(" "+ entry.getKey() + " || ");
+            }
+            System.out.println();
+            
+            for (int i = 0; i < arr.length(); i++)
+            {   
+                 System.out.print( i + " -  ");
+                for (Map.Entry<String, String> entry : columns.entrySet())
+                {
+                    String value = arr.getJSONObject(i).getJSONObject(entry.getKey()).getString("value");
+                    System.out.print( "  ||  "+value);
+                }
+                System.out.println();
+            }
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Exception occured: Message " + ex.getMessage());
+        }        
+        
+    }
 }
