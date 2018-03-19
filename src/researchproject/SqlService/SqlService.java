@@ -43,7 +43,6 @@ public class SqlService {
         }
         createSql += paramStatement + ");";
         System.out.println("CREATE TABLE " + table);
-        System.out.println(createSql);
         SqlRepClient.runStatement(createSql);
         return returnResult;
     }

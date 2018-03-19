@@ -22,7 +22,6 @@ import researchproject.models.Triple;
  * THIS CLASS RESPONSIBLE FOR LOCALIZING GLOBAL QUERIES
  */
 public class LocalQueryBuilder {
-    public final static String _datasetUri = "http://localhost:8890/Data-fixed22" ;
     
     public static String build(String globalQuery)
     {
@@ -39,8 +38,6 @@ public class LocalQueryBuilder {
             String variablesQuery = variablesQueries.get(j);            
             RLogger.info("|| SELECT SUBQUERY FOR VARIABLES || --> " +  variablesQuery);
             
-            //JSONObject subQueryVariables = VirtuosoClient.sendRequest(variablesQuery, _globalSchemaUri);
-            //variables.putAll(JsonObjectParser.getVariables(subQueryVariables));
             List<String> subQueryVariables2 = SparqlService.getVariables(variablesQuery);
             Map<String,String> pairs = GlobalSchemaParser.GetVariables(subQueryVariables2);
             variables.putAll(pairs);

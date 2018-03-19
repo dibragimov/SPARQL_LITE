@@ -101,7 +101,7 @@ public class TripleCombinator {
             prevS = currS; 
             prevO = currO;
         }
-        System.out.println(result);
+       // System.out.println(result);
         return result;
     }
     

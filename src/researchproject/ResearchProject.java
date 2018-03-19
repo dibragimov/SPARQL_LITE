@@ -26,9 +26,10 @@ import researchproject.mapping.JsonObjectParser;
  */
 public class ResearchProject {
 
-    private static String _query = "prefix qb: <http://purl.org/linked-data/cube#> prefix qb4o: <http://purl.org/olap#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix skos: <http://www.w3.org/2004/02/skos/core#> prefix xsd: <http://www.w3.org/2001/XMLSchema#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/> prefix gs: <http://example.org/globalschema#> prefix ex: <http://example.org/federation#> CONSTRUCT{ ?offer rdf:type qb:Observation . ?offer qb:DataSet gs:OfferDataset . ?offer ex:product ?product . ?offer ex:vendor ?vendor . ?vendor rdf:type bsbm:Vendor . ?vendor skos:broader ?city . ?city skos:broader ?country . } WHERE { ?offer rdf:type qb:Observation . ?offer qb:DataSet gs:OfferDataset . ?offer ex:product ?product . ?offer ex:vendor ?vendor . ?vendor rdf:type bsbm:Vendor . ?vendor skos:broader ?city . ?city skos:broader ?country . }";
-    private static String _named_uri = "http://localhost:8890/DAV-mapping";
-    private static int[] queryNo = new int[]{0,1,2,3,4,5,6,7};
+    private static int[] queryNo = new int[]{0,1,2,3,4,5,6,7};    
+    private static String americaDataset = "http://localhost:8890/Data-America";
+    private static String europeDataset = "http://localhost:8890/Data-Europe";
+    private static String asiaDataset = "http://localhost:8890/Data-Asia";
     
     public static void main(String[] args) {
        RLogger.initialize();       
@@ -59,7 +60,11 @@ public class ResearchProject {
                 System.out.println("=== " + queryString);
                 try {                 
                     System.out.println("query -->"+ queryString);
-                    JSONObject jObject = VirtuosoClient.sendRequest(queryString, "http://localhost:8890/Data-set");
+                    JSONObject jObject = VirtuosoClient.sendRequest(queryString, americaDataset);
+                    JsonObjectParser.showResult( jObject);
+                    jObject = VirtuosoClient.sendRequest(queryString, americaDataset);
+                    JsonObjectParser.showResult( jObject);
+                    jObject = VirtuosoClient.sendRequest(queryString, americaDataset);
                     JsonObjectParser.showResult( jObject);
                 }
                 catch (Exception e)
@@ -76,10 +81,17 @@ public class ResearchProject {
                 try {                 
                     String table = "Table_Query" + index + "_table" + tableIndex;
                     System.out.println("query -->"+ query);
-                    JSONObject jObject = VirtuosoClient.sendRequest(query, "http://localhost:8890/Data-set");
+                    JSONObject jObject = VirtuosoClient.sendRequest(query, americaDataset);
                     List<String> columns = SqlService.createTable(jObject, table);
                     String sql = JsonObjectParser.populateTable(table, jObject);
+                    SqlRepClient.runStatement(sql);                    
+                    jObject = VirtuosoClient.sendRequest(query, europeDataset);
+                    sql = JsonObjectParser.populateTable(table, jObject);                    
                     SqlRepClient.runStatement(sql);
+                    jObject = VirtuosoClient.sendRequest(query, asiaDataset);
+                    sql = JsonObjectParser.populateTable(table, jObject);
+                    SqlRepClient.runStatement(sql);
+                    
                     tableDetails.put(table, columns);                 
                 }
                 catch (Exception e)
