@@ -32,13 +32,15 @@ import researchproject.Parser.QueryParser;
  */
 public class SparqlService {
     private static Model _gInstance = null;
+    private static final String _mappingPath = System.getProperty("user.dir")+System.getProperty("file.separator")+"Library"+System.getProperty("file.separator")+"mapping-extended.ttl";
+    private static final String _gSchemaPath = System.getProperty("user.dir")+System.getProperty("file.separator")+"Library"+System.getProperty("file.separator")+"global-schema-extended.ttl";
+   
     public static Model getGSchemaInstance()
     {
         if(_gInstance == null)
         {
         FileManager.get().addLocatorClassLoader(SparqlService.class.getClassLoader());
-        //_gInstance = FileManager.get().loadModel("D:/WIUT/Research/global-schema-fixed.ttl");
-        _gInstance = FileManager.get().loadModel("D:/WIUT/Research/global-schema-extended.ttl");
+        _gInstance = FileManager.get().loadModel(_gSchemaPath);
         }
         return _gInstance;
     }
@@ -49,8 +51,7 @@ public class SparqlService {
         if(_mInstance == null)
         {
         FileManager.get().addLocatorClassLoader(SparqlService.class.getClassLoader());
-       // _mInstance = FileManager.get().loadModel("D:/WIUT/Research/Mapping-fixed.ttl");
-       _mInstance = FileManager.get().loadModel("D:/WIUT/Research/mapping-extended.ttl");
+       _mInstance = FileManager.get().loadModel(_mappingPath);
         }
         return _mInstance;
     }   
