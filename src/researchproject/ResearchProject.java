@@ -27,9 +27,9 @@ import researchproject.mapping.JsonObjectParser;
 public class ResearchProject {
 
     private static int[] queryNo = new int[]{0,1,2,3,4,5,6,7};    
-    private static String americaDataset = "http://localhost:8890/Data-America";
-    private static String europeDataset = "http://localhost:8890/Data-Europe";
-    private static String asiaDataset = "http://localhost:8890/Data-Asia";
+    private static String americaDataset = "http://localhost:8890/Data-America1";
+    private static String europeDataset = "http://localhost:8890/Data-Europe1";
+    private static String asiaDataset = "http://localhost:8890/Data-Asia1";
     
     public static void main(String[] args) {
        RLogger.initialize();       
@@ -44,7 +44,7 @@ public class ResearchProject {
             System.out.println("localizedQuery --> " + localizedQuery);
             String entailedQuery = localizedQuery;//Helper.RemoveDoubleSpaces(EntailmentParser.GetBasicQuery(localizedQuery));
 
-            exectureSubQuery(entailedQuery, 6);
+            exectureSubQuery(entailedQuery, i);
        }
      }
     
@@ -60,12 +60,30 @@ public class ResearchProject {
                 System.out.println("=== " + queryString);
                 try {                 
                     System.out.println("query -->"+ queryString);
-                    JSONObject jObject = VirtuosoClient.sendRequest(queryString, americaDataset);
-                    JsonObjectParser.showResult( jObject);
+                    String table = "Table_Query" + index + "_table" + tableIndex;
+                    JSONObject jObject = VirtuosoClient.sendRequest(queryString, europeDataset);
+                    List<String> columns = SqlService.createTable(jObject, table);
+                    String sql = JsonObjectParser.populateTable(table, jObject);
+                    SqlRepClient.runStatement(sql);                    
                     jObject = VirtuosoClient.sendRequest(queryString, americaDataset);
-                    JsonObjectParser.showResult( jObject);
-                    jObject = VirtuosoClient.sendRequest(queryString, americaDataset);
-                    JsonObjectParser.showResult( jObject);
+                    sql = JsonObjectParser.populateTable(table, jObject);                    
+                    SqlRepClient.runStatement(sql);
+                    jObject = VirtuosoClient.sendRequest(queryString, asiaDataset);
+                    sql = JsonObjectParser.populateTable(table, jObject);
+                    SqlRepClient.runStatement(sql);
+                    String columnsComma = "";
+                    boolean isFirst = true;
+                    for(String column : columns)
+                    {
+                        if(isFirst) 
+                        {
+                            columnsComma += column +" ";
+                            isFirst = false;
+                        }
+                        else                             
+                            columnsComma +=", " + column +" ";
+                    }
+                    SqlRepClient.selectAll("SELECT "+columnsComma+" FROM " + table);
                 }
                 catch (Exception e)
                 {
