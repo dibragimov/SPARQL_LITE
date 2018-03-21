@@ -35,8 +35,10 @@ public class ResearchProject {
        RLogger.initialize();       
        SqlRepClient.Initialize();
        for(int i =0; i < queryNo.length; i++)
-       {
-            String globalQuery = GQueries.getQuery(i);
+      {
+        
+            int queryNo = i ;//i+1;
+            String globalQuery = GQueries.getQuery(queryNo);
             RLogger.info("|| GLOBAL QUERY || --> " + globalQuery);
             System.out.println("globalQuery --> " + globalQuery);
             String localizedQuery = LocalQueryBuilder.build(globalQuery);
@@ -44,7 +46,7 @@ public class ResearchProject {
             System.out.println("localizedQuery --> " + localizedQuery);
             String entailedQuery = localizedQuery;//Helper.RemoveDoubleSpaces(EntailmentParser.GetBasicQuery(localizedQuery));
 
-            exectureSubQuery(entailedQuery, i);
+            exectureSubQuery(entailedQuery, (queryNo+1));
        }
      }
     

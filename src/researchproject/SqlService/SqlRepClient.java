@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import researchproject.Logging.RLogger;
 
 
 // THIS CLASS IS RESPONSIBLE FOR EXECUTING SQL STATEMENT (RATIONAL)
@@ -103,13 +104,22 @@ public class SqlRepClient {
             ResultSetMetaData rsmd = rs.getMetaData();
             int columnsNumber = rsmd.getColumnCount();
             System.out.println();
+            String columns = "";
             for (int i = 1; i <= columnsNumber; i++) {
-                    if (i > 1) System.out.print(" || ");
+                    if (i > 1) 
+                    {
+                        columns += " || ";
+                        System.out.print(" || ");
+                    }
                     String columnValue = rs.getString(i);
-                    System.out.print(rsmd.getColumnName(i));
+                    String result = rsmd.getColumnName(i);
+                    System.out.print(result);
+                    columns += result;
             }
+           // RLogger.info("|| RESULT || \r\n " + columns);
             System.out.println();
             System.out.println();
+            String result = "";
             int position = 1;
            while (rs.next()) {
                 System.out.print(position +" - ");
@@ -117,12 +127,16 @@ public class SqlRepClient {
                     System.out.print(" || ");
                     String columnValue = rs.getString(i);
                     System.out.print(columnValue + " ");
+                    result += " || " + columnValue + " ";
                 }
+                result += "\r\n";
                 System.out.println("");
                 position++;
             }
+             RLogger.info("|| RESULT || \r\n " + columns + " \r\n " + result);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 }
+//RLogger.info("|| LOCALIZED QUERY || --> " + localizedQuery);

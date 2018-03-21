@@ -60,14 +60,15 @@ public class LocalQueryBuilder {
             globalQuery = globalQuery.replace(globalTriples," "+localTriples+" ");
            }
            catch(Exception ex) {
-                RLogger.info("||EXCEPTION WHILE BUILDING LOCAL QUERY || --> " + ex.getMessage());
+                //RLogger.info("||EXCEPTION WHILE BUILDING LOCAL QUERY || --> " + ex.getMessage());
            }
        }
        //replace variables in SELECT params 
        for (Map.Entry<String, String> entry : variables.entrySet())
        {
            RLogger.info("|| VARIABLE'S PAIR || --> " + entry.getKey()+  " == "+ entry.getValue());
-           globalQuery = globalQuery.replaceAll("\\?"+entry.getKey()+"(?![A-Za-z]+)",entry.getValue());
+           //globalQuery = globalQuery.replaceAll("\\?"+entry.getKey()+"(?![A-Za-z]+)",entry.getValue());
+           globalQuery = globalQuery.replaceAll("\\"+entry. getValue()+"(?![A-Za-z0-9]+)","\\?"+entry.getKey());
        }
        
        return globalQuery;// localizedSubQueries;

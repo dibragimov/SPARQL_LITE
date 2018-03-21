@@ -176,7 +176,7 @@ public class JsonObjectParser {
                 bulkInsert += insertSql;
                 ++j;
             }
-            System.out.println("BULD INSERT : " + bulkInsert);
+            //System.out.println("BULk INSERT : " + bulkInsert);
         }
         catch(Exception ex)
         {
