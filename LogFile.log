@@ -1,398 +1,398 @@
-мар 21, 2018 10:02:10 PM researchproject.Logging.RLogger initialize
+мар 25, 2018 1:16:02 PM researchproject.Logging.RLogger initialize
 INFO: == LOGGER ==
-мар 21, 2018 10:02:10 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:02 PM researchproject.Logging.RLogger info
 INFO: || GLOBAL QUERY || --> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/> prefix rev: <http://purl.org/stuff/rev#> prefix xsd: <http://www.w3.org/2001/XMLSchema#> prefix ex: <http://example.org/federation#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix skos: <http://www.w3.org/2004/02/skos/core#> prefix qb: <http://purl.org/linked-data/cube#> prefix gs: <http://example.org/globalschema#> Select ?country ?product ?nrOfReviews ?avgPrice { { Select ?country (max(?nrOfReviews) As ?maxReviews) { { Select ?country ?product (count(?review) As ?nrOfReviews) { ?product a <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductType45> . ?review ex:reviewFor ?product . ?review rdf:type ex:Review . ?review ex:reviewer ?reviewer . ?reviewer rdf:type ex:Person. ?reviewer skos:broader ?city . ?city skos:broader ?country . } Group By ?country ?product } } Group By ?country } { Select ?product (avg(xsd:float(str(?price))) As ?avgPrice) { ?product a <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductType45> . ?offer ex:product ?product . ?offer rdf:type qb:Observation . ?offer qb:DataSet gs:OfferDataset . ?offer ex:productPrice ?price . } Group By ?product } { Select ?country ?product (count(?review) As ?nrOfReviews) { ?product a <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductType45> . ?review ex:reviewFor ?product . ?review rdf:type ex:Review . ?review ex:reviewer ?reviewer . ?reviewer rdf:type ex:Person. ?reviewer skos:broader ?city . ?city skos:broader ?country . } Group By ?country ?product } FILTER(?nrOfReviews=?maxReviews) } Order By desc(?nrOfReviews) ?country ?product Limit 100
 
-мар 21, 2018 10:02:10 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:02 PM researchproject.Logging.RLogger info
 INFO: || SELECT SUBQUERY FOR VARIABLES || --> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/> prefix rev: <http://purl.org/stuff/rev#> prefix xsd: <http://www.w3.org/2001/XMLSchema#> prefix ex: <http://example.org/federation#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix skos: <http://www.w3.org/2004/02/skos/core#> prefix qb: <http://purl.org/linked-data/cube#> prefix gs: <http://example.org/globalschema#>  SELECT *  WHERE {  ?review ex:reviewFor ?product . ?review rdf:type ex:Review . ?review ex:reviewer ?reviewer . ?reviewer rdf:type ex:Person. ?reviewer skos:broader ?city . ?city skos:broader ?country .  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || CONSTRUCT SUBQUERY FOR TRIPLES || --> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/> prefix rev: <http://purl.org/stuff/rev#> prefix xsd: <http://www.w3.org/2001/XMLSchema#> prefix ex: <http://example.org/federation#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix skos: <http://www.w3.org/2004/02/skos/core#> prefix qb: <http://purl.org/linked-data/cube#> prefix gs: <http://example.org/globalschema#>  CONSTRUCT{  ?review ex:reviewFor ?product . ?review rdf:type ex:Review . ?review ex:reviewer ?reviewer . ?reviewer rdf:type ex:Person. ?reviewer skos:broader ?city . ?city skos:broader ?country .  } WHERE {  ?review ex:reviewFor ?product . ?review rdf:type ex:Review . ?review ex:reviewer ?reviewer . ?reviewer rdf:type ex:Person. ?reviewer skos:broader ?city . ?city skos:broader ?country .  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node4>.  ?nn1 sp:predicate <http://example.org/federation#reviewer>.  ?nn1 sp:object <http://example.org/globalschema#node43>.  ?glist1 sp:elements ?gsmt2.?gsmt2 fs:pattern  ?nn2. ?nn2 sp:subject <http://example.org/globalschema#node43>.  ?nn2 sp:predicate <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>.  ?nn2 sp:object <http://example.org/federation#Person>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt21
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt20
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node4>.  ?nn1 sp:predicate <http://example.org/federation#reviewer>.  ?nn1 sp:object <http://example.org/globalschema#node43>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt21
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt20
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node4>.  ?nn1 sp:predicate <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>.  ?nn1 sp:object <http://example.org/federation#Review>.  ?glist1 sp:elements ?gsmt2.?gsmt2 fs:pattern  ?nn2. ?nn2 sp:subject <http://example.org/globalschema#node4>.  ?nn2 sp:predicate <http://example.org/federation#reviewFor>.  ?nn2 sp:object <http://example.org/globalschema#node2>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt16
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt15
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node4>.  ?nn1 sp:predicate <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>.  ?nn1 sp:object <http://example.org/federation#Review>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt16
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt15
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node4>.  ?nn1 sp:predicate <http://example.org/federation#reviewFor>.  ?nn1 sp:object <http://example.org/globalschema#node2>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt16
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt15
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node43>.  ?nn1 sp:predicate <http://www.w3.org/2004/02/skos/core#broader>.  ?nn1 sp:object <http://example.org/globalschema#node431>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt22
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt23
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node43>.  ?nn1 sp:predicate <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>.  ?nn1 sp:object <http://example.org/federation#Person>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt21
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt20
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node431>.  ?nn1 sp:predicate <http://www.w3.org/2004/02/skos/core#broader>.  ?nn1 sp:object <http://example.org/globalschema#node432>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt25
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt24
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt22> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node43 p: http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/livesIn o:http://example.org/localschema#node431
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt21> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node43 p: rdf:type o:http://xmlns.com/foaf/0.1/Person
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt24> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node431 p: http://www.geonames.org/ontology#parentFeature o:http://example.org/localschema#node432
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt23> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node431 p: rdf:type o:http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/City
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt20> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node4 p: http://purl.org/stuff/rev#reviewer o:http://example.org/localschema#node43
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt15> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node4 p: rdf:type o:http://purl.org/stuff/rev#Review
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt25> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node432 p: rdf:type o:http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/Country
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt16> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node4 p: http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/reviewFor o:http://example.org/localschema#node2
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || SELECT SUBQUERY FOR VARIABLES || --> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/> prefix rev: <http://purl.org/stuff/rev#> prefix xsd: <http://www.w3.org/2001/XMLSchema#> prefix ex: <http://example.org/federation#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix skos: <http://www.w3.org/2004/02/skos/core#> prefix qb: <http://purl.org/linked-data/cube#> prefix gs: <http://example.org/globalschema#>  SELECT *  WHERE {  ?offer ex:product ?product . ?offer rdf:type qb:Observation . ?offer qb:DataSet gs:OfferDataset . ?offer ex:productPrice ?price .  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || CONSTRUCT SUBQUERY FOR TRIPLES || --> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/> prefix rev: <http://purl.org/stuff/rev#> prefix xsd: <http://www.w3.org/2001/XMLSchema#> prefix ex: <http://example.org/federation#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix skos: <http://www.w3.org/2004/02/skos/core#> prefix qb: <http://purl.org/linked-data/cube#> prefix gs: <http://example.org/globalschema#>  CONSTRUCT{  ?offer ex:product ?product . ?offer rdf:type qb:Observation . ?offer qb:DataSet gs:OfferDataset . ?offer ex:productPrice ?price .  } WHERE {  ?offer ex:product ?product . ?offer rdf:type qb:Observation . ?offer qb:DataSet gs:OfferDataset . ?offer ex:productPrice ?price .  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node1>.  ?nn1 sp:predicate <http://example.org/federation#productPrice>.  ?nn1 sp:object <http://example.org/globalschema#node6>.  ?glist1 sp:elements ?gsmt2.?gsmt2 fs:pattern  ?nn2. ?nn2 sp:subject <http://example.org/globalschema#node1>.  ?nn2 sp:predicate <http://purl.org/linked-data/cube#DataSet>.  ?nn2 sp:object <http://example.org/globalschema#OfferDataset>.  ?glist1 sp:elements ?gsmt3.?gsmt3 fs:pattern  ?nn3. ?nn3 sp:subject <http://example.org/globalschema#node1>.  ?nn3 sp:predicate <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>.  ?nn3 sp:object <http://purl.org/linked-data/cube#Observation>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt2
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt1
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node1>.  ?nn1 sp:predicate <http://example.org/federation#productPrice>.  ?nn1 sp:object <http://example.org/globalschema#node6>.  ?glist1 sp:elements ?gsmt2.?gsmt2 fs:pattern  ?nn2. ?nn2 sp:subject <http://example.org/globalschema#node1>.  ?nn2 sp:predicate <http://purl.org/linked-data/cube#DataSet>.  ?nn2 sp:object <http://example.org/globalschema#OfferDataset>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt2
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt1
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node1>.  ?nn1 sp:predicate <http://example.org/federation#productPrice>.  ?nn1 sp:object <http://example.org/globalschema#node6>.  ?glist1 sp:elements ?gsmt2.?gsmt2 fs:pattern  ?nn2. ?nn2 sp:subject <http://example.org/globalschema#node1>.  ?nn2 sp:predicate <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>.  ?nn2 sp:object <http://purl.org/linked-data/cube#Observation>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt2
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt1
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node1>.  ?nn1 sp:predicate <http://example.org/federation#productPrice>.  ?nn1 sp:object <http://example.org/globalschema#node6>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt2
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt1
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node1>.  ?nn1 sp:predicate <http://purl.org/linked-data/cube#DataSet>.  ?nn1 sp:object <http://example.org/globalschema#OfferDataset>.  ?glist1 sp:elements ?gsmt2.?gsmt2 fs:pattern  ?nn2. ?nn2 sp:subject <http://example.org/globalschema#node1>.  ?nn2 sp:predicate <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>.  ?nn2 sp:object <http://purl.org/linked-data/cube#Observation>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt2
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt1
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node1>.  ?nn1 sp:predicate <http://purl.org/linked-data/cube#DataSet>.  ?nn1 sp:object <http://example.org/globalschema#OfferDataset>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt2
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt1
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node1>.  ?nn1 sp:predicate <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>.  ?nn1 sp:object <http://purl.org/linked-data/cube#Observation>.  ?glist1 sp:elements ?gsmt2.?gsmt2 fs:pattern  ?nn2. ?nn2 sp:subject <http://example.org/globalschema#node1>.  ?nn2 sp:predicate <http://example.org/federation#product>.  ?nn2 sp:object <http://example.org/globalschema#node2>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt6
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt5
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node1>.  ?nn1 sp:predicate <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>.  ?nn1 sp:object <http://purl.org/linked-data/cube#Observation>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt6
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt2
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt5
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt1
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node1>.  ?nn1 sp:predicate <http://example.org/federation#product>.  ?nn1 sp:object <http://example.org/globalschema#node2>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt6
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt5
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt2> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node1 p: http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/price o:http://example.org/localschema#node6
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt1> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node1 p: rdf:type o:http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/Offer
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt6> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node2 p: rdf:type o:http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/Product
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt5> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node1 p: http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/product o:http://example.org/localschema#node2
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || SELECT SUBQUERY FOR VARIABLES || --> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/> prefix rev: <http://purl.org/stuff/rev#> prefix xsd: <http://www.w3.org/2001/XMLSchema#> prefix ex: <http://example.org/federation#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix skos: <http://www.w3.org/2004/02/skos/core#> prefix qb: <http://purl.org/linked-data/cube#> prefix gs: <http://example.org/globalschema#>  SELECT *  WHERE {  ?review ex:reviewFor ?product . ?review rdf:type ex:Review . ?review ex:reviewer ?reviewer . ?reviewer rdf:type ex:Person. ?reviewer skos:broader ?city . ?city skos:broader ?country .  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || CONSTRUCT SUBQUERY FOR TRIPLES || --> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/> prefix rev: <http://purl.org/stuff/rev#> prefix xsd: <http://www.w3.org/2001/XMLSchema#> prefix ex: <http://example.org/federation#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix skos: <http://www.w3.org/2004/02/skos/core#> prefix qb: <http://purl.org/linked-data/cube#> prefix gs: <http://example.org/globalschema#>  CONSTRUCT{  ?review ex:reviewFor ?product . ?review rdf:type ex:Review . ?review ex:reviewer ?reviewer . ?reviewer rdf:type ex:Person. ?reviewer skos:broader ?city . ?city skos:broader ?country .  } WHERE {  ?review ex:reviewFor ?product . ?review rdf:type ex:Review . ?review ex:reviewer ?reviewer . ?reviewer rdf:type ex:Person. ?reviewer skos:broader ?city . ?city skos:broader ?country .  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node4>.  ?nn1 sp:predicate <http://example.org/federation#reviewer>.  ?nn1 sp:object <http://example.org/globalschema#node43>.  ?glist1 sp:elements ?gsmt2.?gsmt2 fs:pattern  ?nn2. ?nn2 sp:subject <http://example.org/globalschema#node43>.  ?nn2 sp:predicate <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>.  ?nn2 sp:object <http://example.org/federation#Person>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt21
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt20
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node4>.  ?nn1 sp:predicate <http://example.org/federation#reviewer>.  ?nn1 sp:object <http://example.org/globalschema#node43>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt21
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt20
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node4>.  ?nn1 sp:predicate <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>.  ?nn1 sp:object <http://example.org/federation#Review>.  ?glist1 sp:elements ?gsmt2.?gsmt2 fs:pattern  ?nn2. ?nn2 sp:subject <http://example.org/globalschema#node4>.  ?nn2 sp:predicate <http://example.org/federation#reviewFor>.  ?nn2 sp:object <http://example.org/globalschema#node2>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt16
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt15
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node4>.  ?nn1 sp:predicate <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>.  ?nn1 sp:object <http://example.org/federation#Review>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt16
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt15
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node4>.  ?nn1 sp:predicate <http://example.org/federation#reviewFor>.  ?nn1 sp:object <http://example.org/globalschema#node2>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt16
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt15
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node43>.  ?nn1 sp:predicate <http://www.w3.org/2004/02/skos/core#broader>.  ?nn1 sp:object <http://example.org/globalschema#node431>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt22
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt23
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node43>.  ?nn1 sp:predicate <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>.  ?nn1 sp:object <http://example.org/federation#Person>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt21
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt20
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LSMT QUERY || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?lsmt WHERE { ?llist1 sp:elements ?lsmt. ?glist1 fs:schemaMatch ?llist1.  ?glist1 sp:elements ?gsmt1.?gsmt1 fs:pattern  ?nn1. ?nn1 sp:subject <http://example.org/globalschema#node431>.  ?nn1 sp:predicate <http://www.w3.org/2004/02/skos/core#broader>.  ?nn1 sp:object <http://example.org/globalschema#node432>.  }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt25
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || RETURNED LSMT || --> http://example.org/federation#lsmt24
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt22> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node43 p: http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/livesIn o:http://example.org/localschema#node431
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt21> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node43 p: rdf:type o:http://xmlns.com/foaf/0.1/Person
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt24> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node431 p: http://www.geonames.org/ontology#parentFeature o:http://example.org/localschema#node432
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt23> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node431 p: rdf:type o:http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/City
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt20> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node4 p: http://purl.org/stuff/rev#reviewer o:http://example.org/localschema#node43
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt15> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node4 p: rdf:type o:http://purl.org/stuff/rev#Review
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt25> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node432 p: rdf:type o:http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/Country
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||  QUERY FOR LSMT TRIPLE PATTERN || --> prefix gs: <http://example.org/globalschema#> prefix ls: <http://example.org/localschema#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix ex: <http://example.org/federation#> prefix fs: <http://spinrdf.org/spin#> prefix sp: <http://spinrdf.org/sp#> prefix qb: <http://purl.org/linked-data/cube#> prefix skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?s ?p ?o WHERE { <http://example.org/federation#lsmt16> fs:pattern ?nn. ?nn sp:subject ?s. ?nn sp:predicate ?p. ?nn sp:object ?o. }
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: ||   LSMT TRIPLE: || --> s: http://example.org/localschema#node4 p: http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/reviewFor o:http://example.org/localschema#node2
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || VARIABLE'S PAIR || --> offer == ?node1
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || VARIABLE'S PAIR || --> country == ?node432
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || VARIABLE'S PAIR || --> product == ?node2
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || VARIABLE'S PAIR || --> city == ?node431
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || VARIABLE'S PAIR || --> review == ?node4
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || VARIABLE'S PAIR || --> price == ?node6
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || VARIABLE'S PAIR || --> reviewer == ?node43
 
-мар 21, 2018 10:02:11 PM researchproject.Logging.RLogger info
+мар 25, 2018 1:16:03 PM researchproject.Logging.RLogger info
 INFO: || LOCALIZED QUERY || --> prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> prefix bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/> prefix rev: <http://purl.org/stuff/rev#> prefix xsd: <http://www.w3.org/2001/XMLSchema#> prefix ex: <http://example.org/federation#> prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix skos: <http://www.w3.org/2004/02/skos/core#> prefix qb: <http://purl.org/linked-data/cube#> prefix gs: <http://example.org/globalschema#> Select ?country ?product ?nrOfReviews ?avgPrice { { Select ?country (max(?nrOfReviews) As ?maxReviews) { { Select ?country ?product (count(?review) As ?nrOfReviews) { ?product a <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductType45> . {?review <http://purl.org/stuff/rev#reviewer> ?reviewer .} {?city <http://www.geonames.org/ontology#parentFeature> ?country .} {?reviewer <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/livesIn> ?city .} {?review <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/reviewFor> ?product .} {?reviewer rdf:type <http://xmlns.com/foaf/0.1/Person> .} {?city rdf:type <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/City> .} {?review rdf:type <http://purl.org/stuff/rev#Review> .} {?country rdf:type <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/Country> .}   } Group By ?country ?product } } Group By ?country } { Select ?product (avg(xsd:float(str(?price))) As ?avgPrice) { ?product a <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductType45> . {?offer <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/price> ?price .} {?offer <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/product> ?product .} {?offer rdf:type <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/Offer> .} {?product rdf:type <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/Product> .}   } Group By ?product } { Select ?country ?product (count(?review) As ?nrOfReviews) { ?product a <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductType45> . {?review <http://purl.org/stuff/rev#reviewer> ?reviewer .} {?city <http://www.geonames.org/ontology#parentFeature> ?country .} {?reviewer <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/livesIn> ?city .} {?review <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/reviewFor> ?product .} {?reviewer rdf:type <http://xmlns.com/foaf/0.1/Person> .} {?city rdf:type <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/City> .} {?review rdf:type <http://purl.org/stuff/rev#Review> .} {?country rdf:type <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/Country> .}   } Group By ?country ?product } FILTER(?nrOfReviews=?maxReviews) } Order By desc(?nrOfReviews) ?country ?product Limit 100
 

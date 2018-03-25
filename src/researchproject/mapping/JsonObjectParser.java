@@ -218,4 +218,23 @@ public class JsonObjectParser {
         }        
         
     }
+    
+    public static List<String> getGeoNames(JSONObject jObject)
+    { 
+        List<String> result = new ArrayList<>();
+        try
+        {;
+            JSONArray arr = jObject.getJSONObject("results").getJSONArray("bindings");
+            for (int i = 0; i < arr.length(); i++)
+            {
+                String value =jObject.getJSONObject("results").getJSONArray("bindings").getJSONObject(i).getJSONObject("geoNames").getString("value");
+                result.add(value);
+            }
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Exception occured: Message " + ex.getMessage());
+        }
+        return result;//returnResult;
+    } 
 }

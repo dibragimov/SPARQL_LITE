@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import researchproject.Logging.RLogger;
 import researchproject.Parser.OuterClassParser;
 import researchproject.Parser.QueryParser;
+import researchproject.Parser.RollUpParser;
 import researchproject.Queries.GQueries;
 import researchproject.Queries.LocalQueryBuilder;
 import researchproject.SqlService.SqlRepClient;
@@ -27,9 +28,9 @@ import researchproject.mapping.JsonObjectParser;
 public class ResearchProject {
 
     private static int[] queryNo = new int[]{0,1,2,3,4,5,6,7};    
-    private static String americaDataset = "http://localhost:8890/Data-America1";
-    private static String europeDataset = "http://localhost:8890/Data-Europe1";
-    private static String asiaDataset = "http://localhost:8890/Data-Asia1";
+    private static String americaDataset = "http://localhost:8890/DatasetAmerica";
+    private static String europeDataset = "http://localhost:8890/DatasetEurope";
+    private static String asiaDataset = "http://localhost:8890/DatasetAsia";
     
     public static void main(String[] args) {
        RLogger.initialize();       
@@ -61,6 +62,7 @@ public class ResearchProject {
         {
                 System.out.println("=== " + queryString);
                 try {                 
+                    
                     System.out.println("query -->"+ queryString);
                     String table = "Table_Query" + index + "_table" + tableIndex;
                     JSONObject jObject = VirtuosoClient.sendRequest(queryString, europeDataset);
@@ -101,14 +103,23 @@ public class ResearchProject {
                 try {                 
                     String table = "Table_Query" + index + "_table" + tableIndex;
                     System.out.println("query -->"+ query);
-                    JSONObject jObject = VirtuosoClient.sendRequest(query, americaDataset);
+                    
+                    String americaQuery = RollUpParser.GetFilteredCountries(query, "6255149");
+                    JSONObject jObject = VirtuosoClient.sendRequest(americaQuery, americaDataset);
                     List<String> columns = SqlService.createTable(jObject, table);
                     String sql = JsonObjectParser.populateTable(table, jObject);
                     SqlRepClient.runStatement(sql);                    
-                    jObject = VirtuosoClient.sendRequest(query, europeDataset);
+                    String euQuery = RollUpParser.GetFilteredCountries(query, "6255148");
+                    jObject = VirtuosoClient.sendRequest(euQuery, europeDataset);
+                    if(columns.isEmpty())            
+                        columns = SqlService.createTable(jObject, table);
+                    
                     sql = JsonObjectParser.populateTable(table, jObject);                    
                     SqlRepClient.runStatement(sql);
-                    jObject = VirtuosoClient.sendRequest(query, asiaDataset);
+                    String asiaQuery = RollUpParser.GetFilteredCountries(query, "6255147");
+                    jObject = VirtuosoClient.sendRequest(asiaQuery, asiaDataset);
+                    if(columns.isEmpty())            
+                        columns = SqlService.createTable(jObject, table);
                     sql = JsonObjectParser.populateTable(table, jObject);
                     SqlRepClient.runStatement(sql);
                     
@@ -126,5 +137,5 @@ public class ResearchProject {
             SqlRepClient.selectAll(outerSqlstat);
         }
     }
-    
+
 }

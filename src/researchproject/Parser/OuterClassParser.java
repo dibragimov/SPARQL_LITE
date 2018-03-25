@@ -86,6 +86,10 @@ public class OuterClassParser {
             {
                 outerPart = outerPart.replace("(1.0*", "1.0*");
             }
+            if(suffixPart.contains(".nrOfReviews"))
+            {
+                tableJoin += " WHERE Table_Query"+queryIndex+"_table3.nrOfReviews = Table_Query"+queryIndex+"_table1.maxReviews ";
+            }
             String outerQuery = outerPart + " FROM " + table + " "+ tableJoin + suffixPart;
 
         return outerQuery;
