@@ -35,7 +35,7 @@ public class ResearchProject {
     public static void main(String[] args) {
        RLogger.initialize();       
        SqlRepClient.Initialize();
-       for(int i =0; i < queryNo.length; i++)
+      for(int i =0; i < queryNo.length; i++)
       {
         
             int queryNo = i ;//i+1;
@@ -65,14 +65,26 @@ public class ResearchProject {
                     
                     System.out.println("query -->"+ queryString);
                     String table = "Table_Query" + index + "_table" + tableIndex;
-                    JSONObject jObject = VirtuosoClient.sendRequest(queryString, europeDataset);
+                    
+                    String europeQuery = RollUpParser.GetFilteredCountries(queryString, "6255148");
+                    JSONObject jObject = VirtuosoClient.sendRequest(europeQuery, europeDataset);
                     List<String> columns = SqlService.createTable(jObject, table);
                     String sql = JsonObjectParser.populateTable(table, jObject);
-                    SqlRepClient.runStatement(sql);                    
-                    jObject = VirtuosoClient.sendRequest(queryString, americaDataset);
+                    SqlRepClient.runStatement(sql);  
+                    
+                    String americaQuery = RollUpParser.GetFilteredCountries(queryString, "6255149");
+                    jObject = VirtuosoClient.sendRequest(americaQuery, americaDataset);
+                    if(columns.isEmpty())     
+                        columns = SqlService.createTable(jObject, table);
+                    
                     sql = JsonObjectParser.populateTable(table, jObject);                    
                     SqlRepClient.runStatement(sql);
-                    jObject = VirtuosoClient.sendRequest(queryString, asiaDataset);
+                    
+                    String asiaQuery = RollUpParser.GetFilteredCountries(queryString, "6255147");
+                    jObject = VirtuosoClient.sendRequest(asiaQuery, asiaDataset);
+                    if(columns.isEmpty())            
+                        columns = SqlService.createTable(jObject, table);
+                    
                     sql = JsonObjectParser.populateTable(table, jObject);
                     SqlRepClient.runStatement(sql);
                     String columnsComma = "";

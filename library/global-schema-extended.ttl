@@ -33,6 +33,12 @@ gs:node22 rdf:type ex:ProductFeature .
 #### NEXT LEVEL IN HIERARCHY
 gs:node2 ex:producer gs:node23 .
 gs:node23 rdf:type ex:Producer.
+gs:node23 skos:broader gs:node231 . ##city
+gs:node231 rdf:type ex:City .
+gs:node231 skos:broader gs:node232 . ##country
+gs:node232 rdf:type ex:Country .
+gs:node232 skos:broader gs:node233 . ##continent
+gs:node233 rdf:type ex:Continent .
  
 #### Vendor
 gs:node3 rdf:type ex:Vendor .

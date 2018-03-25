@@ -61,6 +61,7 @@ public class LocalQueryBuilder {
            }
            catch(Exception ex) {
                 //RLogger.info("||EXCEPTION WHILE BUILDING LOCAL QUERY || --> " + ex.getMessage());
+                System.out.println("ex:"+ ex.getMessage());
            }
        }
        //replace variables in SELECT params 

@@ -46,7 +46,7 @@ public class RollUpParser {
         Pattern pattern = Pattern.compile(regex,Pattern.CASE_INSENSITIVE);
         Matcher match = pattern.matcher(query);
         int startIndex = 0;
-        if(match.find()) {
+        while(match.find()) {
             String triple = match.group(0);            
             String variable = triple.substring(1, triple.indexOf(" "));
             continentService = "?"+variable + getFilterCountries(continent);
